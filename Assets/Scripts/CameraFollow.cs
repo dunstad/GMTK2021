@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     public float SmoothTime = 0.3f;
  
     // This value will change at the runtime depending on target movement. Initialize with zero vector.
-    private Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
  
     private void Start()
     {

@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
         if (!invulnerable)
         {
             cam = Camera.main;
-            var shakeStrength = .05f + amount * .05f;
+            var shakeStrength = .15f + amount * .05f;
             cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
 
             invulnerable = true;

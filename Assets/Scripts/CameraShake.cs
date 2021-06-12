@@ -21,7 +21,8 @@ public class CameraShake : MonoBehaviour {
 		float elapsedTime = 0.0f;
 		float damp = 1.0f;
 
-		Vector3 cameraOrigin = thisCamera.transform.position;
+		var camFollower = gameObject.GetComponent<CameraFollow>();
+		var cameraOrigin = thisCamera.transform.position;
 
 		while(elapsedTime < duration){
 
@@ -36,12 +37,17 @@ public class CameraShake : MonoBehaviour {
 			Vector2 offsetValues = Random.insideUnitCircle;
 
 			offsetValues *= amplitude * damp;
+			var smooth = Vector3.SmoothDamp(thisCamera.transform.position, camFollower.Target.position, ref camFollower.velocity, camFollower.SmoothTime);
+			offsetValues.x += smooth.x;
+			offsetValues.y += smooth.y;
 
 			thisCamera.transform.position = new Vector3(offsetValues.x, offsetValues.y, cameraOrigin.z);
 
 			yield return null;
 		}
 
-		thisCamera.transform.position = cameraOrigin;
+		var newPos = thisCamera.transform.position;
+		newPos.z = cameraOrigin.z;
+		thisCamera.transform.position = newPos;
 	}
 }
