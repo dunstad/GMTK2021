@@ -43,10 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Detach()
     {
-        Debug.Log("detach");
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         attachedObject.transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        attachedObject.transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        attachedObject.GetComponent<EnemyHeadCollider>().Invoke("EnableCollider", .1f);
         gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         gameObject.GetComponent<CharacterController2D>().m_Grounded = true;
         attachedObject = null;

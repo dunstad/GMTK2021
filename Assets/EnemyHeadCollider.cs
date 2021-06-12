@@ -18,6 +18,7 @@ public class EnemyHeadCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        // attach the player to the enemy's head
         if (col.tag == "Player")
         {
             transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -30,9 +31,14 @@ public class EnemyHeadCollider : MonoBehaviour
         }
     }
 
+    public void EnableCollider()
+    {
+        transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
     public IEnumerator AttachToHead()
     {
-        Debug.Log("player ocllision");
+        Debug.Log("player collision");
         return null;
         // while (scale < 5 + (tickDifference * 40)) {
         //     scale *= 1.2f;
