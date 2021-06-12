@@ -1015,9 +1015,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920794882}
-  - component: {fileID: 1920794883}
   - component: {fileID: 1920794885}
   - component: {fileID: 1920794884}
+  - component: {fileID: 1920794886}
   m_Layer: 0
   m_Name: pivot
   m_TagString: Untagged
@@ -1042,22 +1042,6 @@ Transform:
   m_Father: {fileID: 296169286}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1920794883
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920794881}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f595df63a796699449d7f07dd8eaee63, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: f595df63a796699449d7f07dd8eaee63, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &1920794884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,6 +1070,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -1.1228251}
   serializedVersion: 2
   m_Radius: 1.6228251
+--- !u!95 &1920794886
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920794881}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42316059d07a43744a654270dfd657e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2027781818
 GameObject:
   m_ObjectHideFlags: 0

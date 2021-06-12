@@ -21,7 +21,7 @@ public class AggroCollider : MonoBehaviour
         if (col.tag == "Player")
         {
             Debug.Log("aggroed");
-            gameObject.GetComponent<Animation>().Play();
+            gameObject.GetComponent<Animator>().Play("telegraph");
         }
     }
 }
