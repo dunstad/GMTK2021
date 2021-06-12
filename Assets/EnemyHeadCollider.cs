@@ -22,6 +22,7 @@ public class EnemyHeadCollider : MonoBehaviour
         if (col.tag == "Player")
         {
             transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            transform.parent.gameObject.GetComponent<Patrol>().enabled = false;
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
             var headOffset = transform.position.y - transform.parent.position.y;
             col.gameObject.GetComponent<PlayerMovement>().headOffset = headOffset;
