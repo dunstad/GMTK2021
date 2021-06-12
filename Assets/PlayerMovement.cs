@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Detach()
     {
-        attachedObject.transform.parent.gameObject.GetComponent<Patrol>().enabled = true;
-        attachedObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        attachedObject.transform.root.GetComponentInChildren<Patrol>().enabled = true;
+        attachedObject.transform.root.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         attachedObject.GetComponent<EnemyHeadCollider>().Invoke("EnableCollider", .1f);
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
@@ -57,10 +57,10 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         if (attachedObject)
         {
-            var newPosition = attachedObject.transform.parent.GetComponent<Rigidbody2D>().position;
+            var newPosition = attachedObject.transform.root.GetComponent<Rigidbody2D>().position;
             newPosition.y += headOffset;
             gameObject.GetComponent<Rigidbody2D>().position = newPosition;
-            gameObject.GetComponent<Rigidbody2D>().velocity = attachedObject.transform.parent.GetComponent<Rigidbody2D>().velocity;
+            gameObject.GetComponent<Rigidbody2D>().velocity = attachedObject.transform.root.GetComponent<Rigidbody2D>().velocity;
         }
         jump = false;
     }

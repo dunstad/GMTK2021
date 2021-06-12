@@ -21,7 +21,6 @@ public class Patrol : MonoBehaviour
         rb.velocity = new Vector2(direction.x * speed * Time.deltaTime, rb.velocity.y);
         var groundDetectionPos = new Vector2(groundDetection.position.x, groundDetection.position.y);
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetectionPos + Vector2.down + (direction / 2), Vector2.down, distance);
-        Debug.Log(groundInfo.collider);
 
         if (!groundInfo.collider)
         {

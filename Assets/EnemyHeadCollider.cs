@@ -21,13 +21,14 @@ public class EnemyHeadCollider : MonoBehaviour
         // attach the player to the enemy's head
         if (col.tag == "Player")
         {
-            transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            transform.parent.gameObject.GetComponent<Patrol>().enabled = false;
+            Debug.Log(transform.root.gameObject.GetComponentInChildren<HurtCollider>());
+            transform.root.gameObject.GetComponentInChildren<HurtCollider>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            transform.root.gameObject.GetComponentInChildren<Patrol>().enabled = false;
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
-            var headOffset = transform.position.y - transform.parent.position.y;
+            var headOffset = transform.position.y - transform.root.position.y;
             col.gameObject.GetComponent<PlayerMovement>().headOffset = headOffset;
             col.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
-            col.gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = transform.parent.GetComponent<Rigidbody2D>();
+            col.gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = transform.root.GetComponent<Rigidbody2D>();
             AttachToHead();
         }
     }
