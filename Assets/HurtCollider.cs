@@ -21,7 +21,9 @@ public class HurtCollider : MonoBehaviour
         var healthComponent = col.GetComponent<Health>();
         if (healthComponent)
         {
-            healthComponent.Hurt(1);
+            var direction = col.transform.position - gameObject.transform.position;
+            direction.Normalize();
+            healthComponent.Hurt(1, direction);
         }
     }
 }
