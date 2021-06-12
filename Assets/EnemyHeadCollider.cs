@@ -21,7 +21,6 @@ public class EnemyHeadCollider : MonoBehaviour
         // attach the player to the enemy's head
         if (col.tag == "Player")
         {
-            Debug.Log(transform.root.gameObject.GetComponentInChildren<HurtCollider>());
             transform.root.gameObject.GetComponentInChildren<HurtCollider>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
             transform.root.gameObject.GetComponentInChildren<Patrol>().enabled = false;
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
