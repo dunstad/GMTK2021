@@ -27,11 +27,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
-                jump = true;
                 if (attachedObject)
                 {
                     Detach();
                 }
+                jump = true;
             }
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         }
@@ -39,26 +39,16 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMove = 0;
         }
-        // if (attachedObject)
-        // {
-        //     gameObject.GetComponent<Rigidbody2D>().position = attachedObject.transform.position;
-        // }
     }
-
-    // void LateUpdate()
-    // {
-    //     if (attachedObject)
-    //     {
-    //         gameObject.GetComponent<Rigidbody2D>().position = attachedObject.transform.position;
-    //     }
-    // }
 
     void Detach()
     {
         Debug.Log("detach");
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        attachedObject.transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         attachedObject.transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = true;
         gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        gameObject.GetComponent<CharacterController2D>().m_Grounded = true;
         attachedObject = null;
     }
 

@@ -24,7 +24,6 @@ public class EnemyHeadCollider : MonoBehaviour
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
             var headOffset = transform.position.y - transform.parent.position.y;
             col.gameObject.GetComponent<PlayerMovement>().headOffset = headOffset;
-            col.gameObject.GetComponent<PlayerMovement>().jump = true;
             col.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
             col.gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = transform.parent.GetComponent<Rigidbody2D>();
             AttachToHead();
