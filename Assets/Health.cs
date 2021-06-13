@@ -39,7 +39,8 @@ public class Health : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(displayHearts[0]);
-                Instantiate(deathParticle);
+                var particleSystem = Instantiate(deathParticle);
+                particleSystem.transform.position = new Vector3(transform.position.x, transform.position.y, -2);
                 cam.GetComponent<CameraFollow>().enabled = false;
                 Destroy(gameObject);
             } else
