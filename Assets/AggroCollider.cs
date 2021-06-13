@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AggroCollider : MonoBehaviour
 {
+    bool stillPlaying = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +20,17 @@ public class AggroCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player")
+        var animator = gameObject.GetComponent<Animator>();
+        if ((col.tag == "Player") && !stillPlaying)
         {
-            Debug.Log("aggroed");
-            gameObject.GetComponent<Animator>().Play("telegraph");
+            animator.Play("telegraph");
+            stillPlaying = true;
+            Invoke("EnableAggroCollider", 1.5f);
         }
+    }
+
+    void EnableAggroCollider()
+    {
+        stillPlaying = false;
     }
 }
