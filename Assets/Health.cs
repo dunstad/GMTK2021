@@ -39,44 +39,54 @@ public class Health : MonoBehaviour
     {
         if (!invulnerable)
         {
+            var isPlayer = transform.root.GetComponentInChildren<CharacterController2D>();
             cam = Camera.main;
 
             health -=1;
-            if (health <= 0)
+            if (health <= 0) // dead
             {
-                Destroy(displayHearts[0]);
                 var particleSystem = Instantiate(deathParticle);
                 particleSystem.transform.position = new Vector3(transform.position.x, transform.position.y, -2);
-                cam.GetComponent<CameraFollow>().enabled = false;
-                Invoke("Restart", 1.5f);
-                // destroying it prevents the scene from restarting
-                transform.position = new Vector3(100, 100, 100); 
-            } else
+                if (isPlayer)
+                {
+                    Destroy(displayHearts[0]);
+                    cam.GetComponent<CameraFollow>().enabled = false;
+                    Invoke("Restart", 1.5f);
+                    // destroying it prevents the scene from restarting
+                    transform.position = new Vector3(100, 100, 100); 
+                } else
+                {
+                    Destroy(gameObject);
+                }
+            } else // not dead yet
             {
-                var shakeStrength = .10f + amount * .05f;
-                cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
+                if (isPlayer)
+                {
+                    var shakeStrength = .10f + amount * .05f;
+                    cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
+
+                    // knockback
+                    var knockbackStrength = 50 * amount;
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(
+                        knockbackStrength * direction.x,
+                        // why do i need to divide only the y direction???
+                        (knockbackStrength / 10) * direction.y), ForceMode2D.Impulse);
+                    gameObject.GetComponent<PlayerMovement>().inputEnabled = false;
+                    Invoke("EnableInput", .1f);
+
+                    if (health == 2)
+                    {
+                        Destroy(displayHearts[2]);
+                    } else
+                    {
+                        Destroy(displayHearts[1]);
+                    }
+                }
 
                 invulnerable = true;
                 Invoke("MakeVulnerable", .5f);
 
                 Flicker();
-
-                // knockback
-                var knockbackStrength = 50 * amount;
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    knockbackStrength * direction.x,
-                    // why do i need to divide only the y direction???
-                    (knockbackStrength / 10) * direction.y), ForceMode2D.Impulse);
-                gameObject.GetComponent<PlayerMovement>().inputEnabled = false;
-                Invoke("EnableInput", .1f);
-
-                if (health == 2)
-                {
-                    Destroy(displayHearts[2]);
-                } else
-                {
-                    Destroy(displayHearts[1]);
-                }
             }
         }
     }
