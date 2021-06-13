@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyHeadCollider : MonoBehaviour
 {
+    public SpriteRenderer bodySprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class EnemyHeadCollider : MonoBehaviour
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
             col.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
             col.gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = transform.root.GetComponent<Rigidbody2D>();
-            AttachToHead();
+            StartCoroutine(ToGreen());
         }
     }
 
@@ -40,15 +42,16 @@ public class EnemyHeadCollider : MonoBehaviour
         transform.parent.Find("hurtbox").gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
-    public IEnumerator AttachToHead()
+    public IEnumerator ToGreen()
     {
+        var startTime = Time.time;
         Debug.Log("player collision");
-        return null;
-        // while (scale < 5 + (tickDifference * 40)) {
-        //     scale *= 1.2f;
-        //     transform.localScale = new Vector3(scale, scale, scale);
-        //     yield return null;
-        // }
-        // Destroy(gameObject);
+        while (Time.time - startTime < 1)
+        {
+            var lerpedColor = Color.Lerp(Color.white, Color.black, Time.time - startTime);
+            bodySprite.color = lerpedColor;
+            yield return null;
+        }
+        bodySprite.color = Color.black;
     }
 }

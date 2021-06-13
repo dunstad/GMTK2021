@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     Camera cam;
     public Renderer spriteRenderer;
     public GameObject deathParticle;
+    public GameObject[] displayHearts;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class Health : MonoBehaviour
             health -=1;
             if (health <= 0)
             {
+                Destroy(displayHearts[0]);
                 Instantiate(deathParticle);
                 cam.GetComponent<CameraFollow>().enabled = false;
                 Destroy(gameObject);
@@ -58,6 +60,14 @@ public class Health : MonoBehaviour
                     (knockbackStrength / 10) * direction.y), ForceMode2D.Impulse);
                 gameObject.GetComponent<PlayerMovement>().inputEnabled = false;
                 Invoke("EnableInput", .1f);
+
+                if (health == 2)
+                {
+                    Destroy(displayHearts[2]);
+                } else
+                {
+                    Destroy(displayHearts[1]);
+                }
             }
         }
     }
