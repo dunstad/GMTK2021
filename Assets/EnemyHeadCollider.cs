@@ -22,12 +22,13 @@ public class EnemyHeadCollider : MonoBehaviour
         if (col.tag == "Player")
         {
             col.gameObject.GetComponent<PlayerMovement>().transform.SetParent(transform.root.GetComponentInChildren<Animator>().transform, true);
+            col.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+            col.gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+            col.gameObject.transform.localScale = new Vector3(1, 1, 1);
 
             transform.root.gameObject.GetComponentInChildren<HurtCollider>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
             transform.root.gameObject.GetComponentInChildren<Patrol>().enabled = false;
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
-            var headOffset = transform.position.y - transform.root.position.y;
-            col.gameObject.GetComponent<PlayerMovement>().headOffset = headOffset;
             col.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
             col.gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = transform.root.GetComponent<Rigidbody2D>();
             AttachToHead();

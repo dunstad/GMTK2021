@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public bool inputEnabled = true;
 
     public GameObject? attachedObject = null;
-    public float headOffset = 0;
     bool justDetached = false;
 
     // Start is called before the first frame update
@@ -45,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
     void Detach()
     {
         transform.SetParent(null, true);
+        transform.localEulerAngles = new Vector3(0, 0, 0);
+        transform.localScale = new Vector3(1, 1, 1);
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
         gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         justDetached = true;
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
@@ -61,18 +64,11 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<CharacterController2D>().m_Grounded = true;
             justDetached = false;
         }
-        if (jump)
+        if (jump && gameObject.GetComponent<CharacterController2D>().m_Grounded)
         {
             gameObject.GetComponentInChildren<Animator>().Play("jump");
         }
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        if (attachedObject)
-        {
-            var newPosition = attachedObject.transform.root.GetComponent<Rigidbody2D>().position;
-            newPosition.y += headOffset;
-            gameObject.GetComponent<Rigidbody2D>().position = newPosition;
-            gameObject.GetComponent<Rigidbody2D>().velocity = attachedObject.transform.root.GetComponent<Rigidbody2D>().velocity;
-        }
         jump = false;
     }
 }
