@@ -46,12 +46,29 @@ public class EnemyHeadCollider : MonoBehaviour
     {
         var startTime = Time.time;
         Debug.Log("player collision");
+        var red = new Color(.925f, .364f, .505f);
+        var green = new Color(.549f, .890f, .341f);
         while (Time.time - startTime < 1)
         {
-            var lerpedColor = Color.Lerp(Color.white, Color.black, Time.time - startTime);
+            var lerpedColor = Color.Lerp(red, green, Time.time - startTime);
             bodySprite.color = lerpedColor;
             yield return null;
         }
-        bodySprite.color = Color.black;
+        bodySprite.color = green;
+    }
+
+    public IEnumerator ToRed()
+    {
+        var startTime = Time.time;
+        Debug.Log("player collision");
+        var red = new Color(.925f, .364f, .505f);
+        var green = new Color(.549f, .890f, .341f);
+        while (Time.time - startTime < 1)
+        {
+            var lerpedColor = Color.Lerp(green, red, Time.time - startTime);
+            bodySprite.color = lerpedColor;
+            yield return null;
+        }
+        bodySprite.color = red;
     }
 }
