@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     bool invulnerable = false;
     Camera cam;
     public Renderer spriteRenderer;
+    public GameObject deathParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -32,27 +33,31 @@ public class Health : MonoBehaviour
         if (!invulnerable)
         {
             cam = Camera.main;
-            var shakeStrength = .10f + amount * .05f;
-            cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
-
-            invulnerable = true;
-            Invoke("MakeVulnerable", .5f);
-
-            Flicker();
-
-            // knockback
-            var knockbackStrength = 50 * amount;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                knockbackStrength * direction.x,
-                // why do i need to divide only the y direction???
-                (knockbackStrength / 10) * direction.y), ForceMode2D.Impulse);
-            gameObject.GetComponent<PlayerMovement>().inputEnabled = false;
-            Invoke("EnableInput", .1f);
 
             health -=1;
             if (health <= 0)
             {
+                Instantiate(deathParticle);
+                cam.GetComponent<CameraFollow>().enabled = false;
                 Destroy(gameObject);
+            } else
+            {
+                var shakeStrength = .10f + amount * .05f;
+                cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
+
+                invulnerable = true;
+                Invoke("MakeVulnerable", .5f);
+
+                Flicker();
+
+                // knockback
+                var knockbackStrength = 50 * amount;
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(
+                    knockbackStrength * direction.x,
+                    // why do i need to divide only the y direction???
+                    (knockbackStrength / 10) * direction.y), ForceMode2D.Impulse);
+                gameObject.GetComponent<PlayerMovement>().inputEnabled = false;
+                Invoke("EnableInput", .1f);
             }
         }
     }
