@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodySprite: {fileID: 773745899053661705}
+  attachSound: {fileID: 0}
 --- !u!1 &773745898236565553
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  distance: 1
+  distance: 0.1
   groundDetection: {fileID: 773745898236565552}
 --- !u!114 &781981067852623369
 MonoBehaviour:
@@ -415,7 +416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773745899053661707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -2.33, z: 1.7301551}
+  m_LocalPosition: {x: -0.01, y: -2.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 773745899703921656}
@@ -538,6 +539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attached: 0
+  aggroSound: {fileID: 0}
+  attackSound: {fileID: 0}
 --- !u!95 &773745899451693053
 Animator:
   serializedVersion: 3
@@ -581,7 +584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773745899703921657}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.009200096, y: 0.05099994, z: 0.13547}
+  m_LocalPosition: {x: 0.009200096, y: 0.05099994, z: 0}
   m_LocalScale: {x: 0.6866497, y: 0.6866497, z: 0.6866497}
   m_Children:
   - {fileID: 773745900000997476}
@@ -614,7 +617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773745900000997477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -2.33, z: 1.7301551}
+  m_LocalPosition: {x: -0.01, y: -2.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 773745899703921656}
