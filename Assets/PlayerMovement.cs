@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Detach()
     {
+        transform.SetParent(null, true);
         gameObject.GetComponent<CharacterController2D>().m_Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         justDetached = true;
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
