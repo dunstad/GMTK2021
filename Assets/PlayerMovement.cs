@@ -60,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<CharacterController2D>().m_Grounded = true;
             justDetached = false;
         }
+        if (jump)
+        {
+            gameObject.GetComponentInChildren<Animator>().Play("jump");
+        }
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         if (attachedObject)
         {
