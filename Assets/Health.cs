@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class Health : MonoBehaviour
         invulnerable = false;
     }
 
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void Hurt(int amount, Vector2 direction)
     {
         if (!invulnerable)
@@ -42,7 +48,9 @@ public class Health : MonoBehaviour
                 var particleSystem = Instantiate(deathParticle);
                 particleSystem.transform.position = new Vector3(transform.position.x, transform.position.y, -2);
                 cam.GetComponent<CameraFollow>().enabled = false;
-                Destroy(gameObject);
+                Invoke("Restart", 1.5f);
+                // destroying it prevents the scene from restarting
+                transform.position = new Vector3(100, 100, 100); 
             } else
             {
                 var shakeStrength = .10f + amount * .05f;
