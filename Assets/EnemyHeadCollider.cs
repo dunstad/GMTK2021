@@ -45,7 +45,6 @@ public class EnemyHeadCollider : MonoBehaviour
     public IEnumerator ToGreen()
     {
         var startTime = Time.time;
-        Debug.Log("player collision");
         var red = new Color(.925f, .364f, .505f);
         var green = new Color(.549f, .890f, .341f);
         while (Time.time - startTime < 1)
@@ -60,7 +59,6 @@ public class EnemyHeadCollider : MonoBehaviour
     public IEnumerator ToRed()
     {
         var startTime = Time.time;
-        Debug.Log("player collision");
         var red = new Color(.925f, .364f, .505f);
         var green = new Color(.549f, .890f, .341f);
         while (Time.time - startTime < 1)

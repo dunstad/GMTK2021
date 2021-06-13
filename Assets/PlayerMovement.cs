@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inputEnabled)
         {
+            if (Input.GetButtonDown("Fire1") && attachedObject)
+            {
+                Debug.Log("attack!");
+                attachedObject.transform.root.GetComponentInChildren<AggroCollider>().Attack();
+            }
             if (Input.GetButtonDown("Jump"))
             {
                 jump = true;

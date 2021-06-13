@@ -20,9 +20,17 @@ public class AggroCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        var animator = gameObject.GetComponent<Animator>();
-        if ((col.tag == "Player") && !stillPlaying)
+        if ((col.tag == "Player"))
         {
+             Attack();
+        }
+    }
+
+    public void Attack()
+    {
+        if (!stillPlaying)
+        {
+            var animator = gameObject.GetComponent<Animator>();
             animator.Play("telegraph");
             stillPlaying = true;
             Invoke("EnableAggroCollider", 1.5f);
