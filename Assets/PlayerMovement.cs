@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         attachedObject.transform.root.GetComponentInChildren<Patrol>().enabled = true;
         attachedObject.transform.root.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        attachedObject.GetComponent<EnemyHeadCollider>().Invoke("EnableCollider", .1f);
+        // attachedObject.GetComponent<EnemyHeadCollider>().Invoke("EnableCollider", .1f);
         if (!hostDying)
         {
             StartCoroutine(attachedObject.GetComponent<EnemyHeadCollider>().ToRed());

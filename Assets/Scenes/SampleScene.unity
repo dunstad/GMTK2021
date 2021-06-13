@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword guy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5334425395137490282, guid: a3e30381f331bc340877fe69d299a9aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3e30381f331bc340877fe69d299a9aa, type: 3}
 --- !u!1 &159721499

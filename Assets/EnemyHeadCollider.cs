@@ -28,7 +28,7 @@ public class EnemyHeadCollider : MonoBehaviour
             col.gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
             col.gameObject.transform.localScale = new Vector3(1, 1, 1);
 
-            transform.root.gameObject.GetComponentInChildren<HurtCollider>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            // transform.root.gameObject.GetComponentInChildren<HurtCollider>().gameObject.GetComponent<BoxCollider2D>().enabled = false;
             transform.root.gameObject.GetComponentInChildren<Patrol>().enabled = false;
             col.gameObject.GetComponent<PlayerMovement>().attachedObject = gameObject;
             col.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;

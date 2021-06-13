@@ -18,6 +18,25 @@ public class HurtCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        var player = col.GetComponent<PlayerMovement>();
+        player = player ? player : col.transform.root.GetComponentInChildren<PlayerMovement>();
+        // don't hurt other enemies unless the player is riding them
+        if (player)
+        {
+            // don't hurt attached players
+            if (!player.attachedObject || (player.attachedObject != transform.parent.GetComponentInChildren<EnemyHeadCollider>().gameObject))
+            {
+                Hurt(col);
+            }
+        // hurt other enemies if the player is riding us
+        } else if (transform.root.GetComponentInChildren<PlayerMovement>())
+        {
+            Hurt(col);
+        }
+    }
+
+    void Hurt(Collider2D col)
+    {
         var healthComponent = col.GetComponent<Health>();
         if (healthComponent)
         {
