@@ -16,7 +16,10 @@ public class Health : MonoBehaviour
     void Start()
     {
         var newColor = new Color(1, 1, 1, 0);
-        spriteRenderer.material.color = newColor;
+        if (spriteRenderer)
+        {
+            spriteRenderer.material.color = newColor;
+        }
     }
 
     // Update is called once per frame
@@ -39,7 +42,7 @@ public class Health : MonoBehaviour
     {
         if (!invulnerable)
         {
-            var isPlayer = transform.root.GetComponentInChildren<CharacterController2D>();
+            var isPlayer = transform.GetComponent<CharacterController2D>();
             cam = Camera.main;
 
             health -=1;
@@ -56,6 +59,11 @@ public class Health : MonoBehaviour
                     transform.position = new Vector3(100, 100, 100); 
                 } else
                 {
+                    var playerMovement = transform.root.GetComponentInChildren<PlayerMovement>();
+                    if (playerMovement)
+                    {
+                        playerMovement.Detach(true);
+                    }
                     Destroy(gameObject);
                 }
             } else // not dead yet
@@ -93,10 +101,13 @@ public class Health : MonoBehaviour
 
     void ToggleAlpha()
     {
-        var currentColor = spriteRenderer.material.color;
-        var newAlpha = currentColor.a <.5 ? 1 : 0;
-        var newColor = new Color(1, 1, 1, newAlpha);
-        spriteRenderer.material.color = newColor;
+        if (spriteRenderer)
+        {
+            var currentColor = spriteRenderer.material.color;
+            var newAlpha = currentColor.a <.5 ? 1 : 0;
+            var newColor = new Color(1, 1, 1, newAlpha);
+            spriteRenderer.material.color = newColor;
+        }
 
     }
 

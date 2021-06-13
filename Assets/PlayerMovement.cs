@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
                 jump = true;
                 if (attachedObject)
                 {
-                    Detach();
+                    Detach(false);
                 }
             }
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Detach()
+    public void Detach(bool hostDying)
     {
         transform.SetParent(null, true);
         transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -59,7 +59,10 @@ public class PlayerMovement : MonoBehaviour
         attachedObject.transform.root.GetComponentInChildren<Patrol>().enabled = true;
         attachedObject.transform.root.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         attachedObject.GetComponent<EnemyHeadCollider>().Invoke("EnableCollider", .1f);
-        StartCoroutine(attachedObject.GetComponent<EnemyHeadCollider>().ToRed());
+        if (!hostDying)
+        {
+            StartCoroutine(attachedObject.GetComponent<EnemyHeadCollider>().ToRed());
+        }
         attachedObject = null;
     }
 
