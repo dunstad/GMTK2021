@@ -5,6 +5,7 @@ using UnityEngine;
 public class AggroCollider : MonoBehaviour
 {
     bool stillPlaying = false;
+    public bool attached = false;
 
     // Start is called before the first frame update
     void Start()

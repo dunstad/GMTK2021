@@ -21,7 +21,7 @@ public class EnemyHeadCollider : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         // attach the player to the enemy's head
-        if (col.tag == "Player")
+        if (col.tag == "Player" && !col.gameObject.GetComponent<PlayerMovement>().attachedObject)
         {
             col.gameObject.GetComponent<PlayerMovement>().transform.SetParent(transform.root.GetComponentInChildren<Animator>().transform, true);
             col.gameObject.transform.localPosition = new Vector3(0, 0, 0);
