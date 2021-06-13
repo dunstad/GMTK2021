@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     public bool jump = false;
     public bool inputEnabled = true;
+    public AudioSource jumpSound;
 
     public GameObject? attachedObject = null;
     bool justDetached = false;
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (jump && gameObject.GetComponent<CharacterController2D>().m_Grounded)
         {
+            jumpSound.Play();
             gameObject.GetComponentInChildren<Animator>().Play("jump");
         }
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
