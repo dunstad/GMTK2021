@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHeadCollider : MonoBehaviour
 {
     public SpriteRenderer bodySprite;
+    public AudioSource attachSound;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class EnemyHeadCollider : MonoBehaviour
         // attach the player to the enemy's head
         if (col.tag == "Player" && !col.gameObject.GetComponent<PlayerMovement>().attachedObject)
         {
+            attachSound.time = .05f;
+            attachSound.Play();
+
             col.gameObject.GetComponent<PlayerMovement>().transform.SetParent(transform.root.GetComponentInChildren<Animator>().transform, true);
             col.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             col.gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);

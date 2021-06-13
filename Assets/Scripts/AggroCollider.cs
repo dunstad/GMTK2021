@@ -6,6 +6,8 @@ public class AggroCollider : MonoBehaviour
 {
     bool stillPlaying = false;
     public bool attached = false;
+    public AudioSource aggroSound;
+    public AudioSource attackSound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +33,18 @@ public class AggroCollider : MonoBehaviour
     {
         if (!stillPlaying)
         {
+            aggroSound.Play();
+            Invoke("PlayAttackSound", .5f);
             var animator = gameObject.GetComponent<Animator>();
             animator.Play("telegraph");
             stillPlaying = true;
             Invoke("EnableAggroCollider", 1.5f);
         }
+    }
+
+    void PlayAttackSound()
+    {
+        attackSound.Play();
     }
 
     void EnableAggroCollider()

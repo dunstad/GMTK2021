@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     public Renderer spriteRenderer;
     public GameObject deathParticle;
     public GameObject[] displayHearts;
+    public AudioSource hurtSound;
+    public AudioSource deathSound;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,9 @@ public class Health : MonoBehaviour
             health -=1;
             if (health <= 0) // dead
             {
+                deathSound.time = .1f;
+                deathSound.Play();
+
                 var particleSystem = Instantiate(deathParticle);
                 particleSystem.transform.position = new Vector3(transform.position.x, transform.position.y, -2);
                 if (isPlayer)
@@ -70,6 +75,9 @@ public class Health : MonoBehaviour
             {
                 if (isPlayer)
                 {
+                    hurtSound.time = .2f;
+                    hurtSound.Play();
+
                     var shakeStrength = .10f + amount * .05f;
                     cam.GetComponent<CameraShake>().Shake(shakeStrength, .5f);
 
